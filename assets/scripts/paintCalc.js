@@ -9,10 +9,16 @@ const calculateSurfaceArea = function (shapeType, param1, param2 = 0) {
     return S;
 };
 
+const calculatePaintBoxes = function (area, layersCount = 1) {
+    return Math.ceil((area / 10) * layersCount);
+};
+
 console.log(
-    calculateSurfaceArea(
-        prompt("Введіть тип фігури"),
-        prompt("Введіть перше число"),
-        prompt("Введіть друге число"),
+    calculatePaintBoxes(
+        calculateSurfaceArea(
+            prompt("Введіть тип фігури"),
+            prompt("Введіть перше число"),
+            prompt("Введіть друге число"),
+        ),
     ),
 );
