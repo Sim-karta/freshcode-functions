@@ -19,6 +19,10 @@ const calculateSurfaceArea = function (shapeType, param1 = 0, param2 = 0) {
 };
 
 const calculatePaintBoxes = function (area, layersCount = 1) {
+    if (area <= 0 || layersCount <= 0) {
+        return 0;
+    }
+
     return Math.ceil((area / 10) * layersCount);
 };
 
@@ -31,6 +35,7 @@ if (shapeType === "cube") {
                 shapeType,
                 Number(prompt("Введіть довжину ребра")),
             ),
+            Number(prompt("Введіть кількість шарів фарби")),
         ),
     );
 } else if (shapeType === "cylinder") {
@@ -41,6 +46,7 @@ if (shapeType === "cube") {
                 Number(prompt("Введіть радіус основи")),
                 Number(prompt("Введіть висоту")),
             ),
+            Number(prompt("Введіть кількість шарів фарби")),
         ),
     );
 } else {
