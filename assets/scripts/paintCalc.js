@@ -1,3 +1,5 @@
+const calcPaintBtn = document.querySelector(".calc-paint-btn");
+
 function isNumber(num) {
     return typeof num === "number" && !Number.isNaN(num);
 }
@@ -41,29 +43,31 @@ const calculatePaintBoxes = function (area, layersCount = 1) {
     return Math.ceil((area / 10) * layersCount);
 };
 
-const shapeType = prompt("Введіть тип фігури");
+calcPaintBtn.addEventListener("click", () => {
+    const shapeType = prompt("Введіть тип фігури");
 
-if (shapeType === "cube") {
-    console.log(
-        calculatePaintBoxes(
-            calculateSurfaceArea(
-                shapeType,
-                Number(prompt("Введіть довжину ребра")),
+    if (shapeType === "cube") {
+        console.log(
+            calculatePaintBoxes(
+                calculateSurfaceArea(
+                    shapeType,
+                    Number(prompt("Введіть довжину ребра")),
+                ),
+                Number(prompt("Введіть кількість шарів фарби")),
             ),
-            Number(prompt("Введіть кількість шарів фарби")),
-        ),
-    );
-} else if (shapeType === "cylinder") {
-    console.log(
-        calculatePaintBoxes(
-            calculateSurfaceArea(
-                shapeType,
-                Number(prompt("Введіть радіус основи")),
-                Number(prompt("Введіть висоту")),
+        );
+    } else if (shapeType === "cylinder") {
+        console.log(
+            calculatePaintBoxes(
+                calculateSurfaceArea(
+                    shapeType,
+                    Number(prompt("Введіть радіус основи")),
+                    Number(prompt("Введіть висоту")),
+                ),
+                Number(prompt("Введіть кількість шарів фарби")),
             ),
-            Number(prompt("Введіть кількість шарів фарби")),
-        ),
-    );
-} else {
-    console.log(calculatePaintBoxes(calculateSurfaceArea(shapeType)));
-}
+        );
+    } else {
+        console.log(calculatePaintBoxes(calculateSurfaceArea(shapeType)));
+    }
+});
