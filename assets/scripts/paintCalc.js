@@ -1,5 +1,14 @@
-const calculateSurfaceArea = function (shapeType, param1, param2 = 0) {
+function isNumber(num) {
+    return typeof num === "number" && !Number.isNaN(num);
+}
+
+const calculateSurfaceArea = function (shapeType, param1 = 0, param2 = 0) {
     let S = 0;
+
+    if (!isNumber(param1) || !isNumber(param2) || param1 < 0 || param2 < 0) {
+        return S;
+    }
+
     if (shapeType === "cube") {
         S = 6 * Math.pow(param1, 2);
     } else if (shapeType === "cylinder") {
@@ -13,12 +22,27 @@ const calculatePaintBoxes = function (area, layersCount = 1) {
     return Math.ceil((area / 10) * layersCount);
 };
 
-console.log(
-    calculatePaintBoxes(
-        calculateSurfaceArea(
-            prompt("Введіть тип фігури"),
-            prompt("Введіть перше число"),
-            prompt("Введіть друге число"),
+const shapeType = prompt("Введіть тип фігури");
+
+if (shapeType === "cube") {
+    console.log(
+        calculatePaintBoxes(
+            calculateSurfaceArea(
+                shapeType,
+                Number(prompt("Введіть довжину ребра")),
+            ),
         ),
-    ),
-);
+    );
+} else if (shapeType === "cylinder") {
+    console.log(
+        calculatePaintBoxes(
+            calculateSurfaceArea(
+                shapeType,
+                Number(prompt("Введіть радіус основи")),
+                Number(prompt("Введіть висоту")),
+            ),
+        ),
+    );
+} else {
+    console.log(calculatePaintBoxes(calculateSurfaceArea(shapeType)));
+}
